@@ -1,10 +1,12 @@
 import type { Dataset, Direction } from '../types'
 import { interpolateNulls, rollingWinRate } from '../lib/metrics'
 import { Sparkline } from './Sparkline'
+import type { SparklineDetailData } from './details/SparklineDetail'
 
 type Props = {
   dataset: Dataset
   windowDays?: number
+  onSparkClick?: (data: SparklineDetailData) => void
 }
 
 type SparkSpec =
@@ -23,7 +25,11 @@ const SPARKS: SparkSpec[] = [
 
 const PCT = (v: number) => `${(v * 100).toFixed(1)}%`
 
-export function SparklineGrid({ dataset, windowDays = 28 }: Props) {
+export function SparklineGrid({
+  dataset,
+  windowDays = 28,
+  onSparkClick,
+}: Props) {
   const window = dataset.days.slice(-windowDays)
   const dates = window.map((d) => d.date)
 
@@ -34,7 +40,6 @@ export function SparklineGrid({ dataset, windowDays = 28 }: Props) {
     >
       {SPARKS.map((spec, idx) => {
         if (spec.kind === 'winrate') {
-          // Rolling 7d sobre TODO el histórico, después tomamos la ventana
           const fullSeries = rollingWinRate(dataset.days, 7)
           const raw = fullSeries.slice(-windowDays)
           const values = interpolateNulls(raw)
@@ -47,6 +52,19 @@ export function SparklineGrid({ dataset, windowDays = 28 }: Props) {
               unit=""
               direction="higher_is_better"
               formatValue={PCT}
+              onClick={
+                onSparkClick
+                  ? () =>
+                      onSparkClick({
+                        label: spec.label,
+                        values,
+                        dates,
+                        unit: '',
+                        direction: 'higher_is_better',
+                        formatValue: PCT,
+                      })
+                  : undefined
+              }
             />
           )
         }
@@ -65,6 +83,18 @@ export function SparklineGrid({ dataset, windowDays = 28 }: Props) {
             dates={dates}
             unit={spec.unit}
             direction={spec.direction}
+            onClick={
+              onSparkClick
+                ? () =>
+                    onSparkClick({
+                      label: spec.label,
+                      values,
+                      dates,
+                      unit: spec.unit,
+                      direction: spec.direction,
+                    })
+                : undefined
+            }
           />
         )
       })}

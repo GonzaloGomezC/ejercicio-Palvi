@@ -74,6 +74,20 @@ export const METRIC_LABELS: Record<string, string> = {
   stale_deals: 'Stale deals',
 }
 
+export const METRIC_DESCRIPTIONS: Record<string, string> = {
+  leads_created: 'Nuevos leads capturados en el día.',
+  leads_qualified: 'Leads marcados como calificados por ventas en el día.',
+  deals_created: 'Oportunidades de venta abiertas en el día.',
+  deals_won: 'Deals cerrados como ganados en el día.',
+  deals_lost: 'Deals cerrados como perdidos en el día.',
+  win_rate: 'Tasa de cierre: ganados / (ganados + perdidos).',
+  avg_response_time_min: 'Tiempo promedio de primera respuesta de ventas a nuevos leads, en minutos.',
+  avg_deal_cycle_days: 'Para deals cerrados hoy, días promedio desde que se abrieron.',
+  support_tickets_opened: 'Tickets de soporte abiertos por clientes en el día.',
+  support_avg_resolution_hours: 'Horas promedio para resolver un ticket de soporte.',
+  stale_deals: 'Deals abiertos con más de 60 días de antigüedad al cierre del día.',
+}
+
 export const IMPACT_MESSAGES: Record<string, string> = {
   avg_response_time_min: 'Respuesta lenta reduce conversión de leads',
   avg_deal_cycle_days: 'Ciclos largos atan capacidad del equipo',

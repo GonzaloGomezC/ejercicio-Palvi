@@ -7,12 +7,20 @@ type Props = {
   unit: string
   delta: DeltaResult | null
   formatValue?: (v: number) => string
+  onClick?: () => void
 }
 
 const DEFAULT_FORMAT = (v: number) =>
   Number.isInteger(v) ? v.toLocaleString('es-CL') : v.toFixed(1)
 
-export function KpiCard({ label, value, unit, delta, formatValue }: Props) {
+export function KpiCard({
+  label,
+  value,
+  unit,
+  delta,
+  formatValue,
+  onClick,
+}: Props) {
   const fmt = formatValue ?? DEFAULT_FORMAT
   const valueText = value === null ? '—' : `${fmt(value)} ${unit}`.trim()
 
@@ -26,8 +34,8 @@ export function KpiCard({ label, value, unit, delta, formatValue }: Props) {
     delta && !delta.isImprovement && delta.raw !== 0 && 'text-status-red',
   )
 
-  return (
-    <div className="rounded-lg bg-white p-4 shadow-sm">
+  const inner = (
+    <>
       <p className="text-xs font-medium uppercase tracking-wide text-navy-700/60">
         {label}
       </p>
@@ -37,6 +45,20 @@ export function KpiCard({ label, value, unit, delta, formatValue }: Props) {
           ? '— sin baseline'
           : `${arrow}${deltaPct}% vs 30d`}
       </p>
-    </div>
+    </>
   )
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className="text-left rounded-lg bg-white p-4 shadow-sm hover:shadow-md hover:bg-navy-900/[0.02] cursor-pointer"
+      >
+        {inner}
+      </button>
+    )
+  }
+
+  return <div className="rounded-lg bg-white p-4 shadow-sm">{inner}</div>
 }

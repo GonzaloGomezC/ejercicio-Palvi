@@ -10,6 +10,7 @@ type Props = {
   unit: string
   direction: Direction
   formatValue?: (v: number) => string
+  onClick?: () => void
 }
 
 const W = 200
@@ -39,9 +40,19 @@ export function Sparkline({
   unit,
   direction,
   formatValue,
+  onClick,
 }: Props) {
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
   const fmt = formatValue ?? DEFAULT_FMT
+  const Root = onClick ? 'button' : 'div'
+  const rootProps = onClick
+    ? {
+        type: 'button' as const,
+        onClick,
+        className:
+          'text-left rounded-lg bg-white p-3 shadow-sm hover:shadow-md hover:bg-navy-900/[0.02] cursor-pointer w-full',
+      }
+    : { className: 'rounded-lg bg-white p-3 shadow-sm' }
 
   const trend = getTrendColor(values, direction)
   const stroke = TREND_STROKE[trend]
@@ -57,7 +68,7 @@ export function Sparkline({
 
   if (!hasData) {
     return (
-      <div className="rounded-lg bg-white p-3 shadow-sm">
+      <Root {...rootProps}>
         <div className="flex items-baseline justify-between gap-2">
           <p className="text-xs font-medium text-navy-700/70 truncate">
             {label}
@@ -67,7 +78,7 @@ export function Sparkline({
         <div className="mt-2 h-14 grid place-items-center text-xs text-navy-700/40">
           sin datos
         </div>
-      </div>
+      </Root>
     )
   }
 
@@ -102,7 +113,7 @@ export function Sparkline({
       : null
 
   return (
-    <div className="rounded-lg bg-white p-3 shadow-sm">
+    <Root {...rootProps}>
       <div className="flex items-baseline justify-between gap-2">
         <p className="text-xs font-medium text-navy-700/70 truncate">
           {label}
@@ -157,6 +168,6 @@ export function Sparkline({
           ? `${hoverPoint.date.slice(5)} · ${fmt(hoverPoint.v)} ${unit}`.trim()
           : ' '}
       </p>
-    </div>
+    </Root>
   )
 }

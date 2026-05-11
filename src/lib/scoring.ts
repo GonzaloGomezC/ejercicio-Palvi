@@ -31,6 +31,8 @@ export type Alert = {
   metricLabel: string
   delta: number | null
   rawDelta: number | null
+  avg7d: number | null
+  avg30d: number | null
   severity: 'critical' | 'warning'
   impactMessage: string
   areaLabel: string
@@ -121,6 +123,8 @@ export function computeAlerts(areaScores: AreaScore[]): Alert[] {
         metricLabel: METRIC_LABELS[metric.key] ?? metric.key,
         delta: metric.delta,
         rawDelta: metric.rawDelta,
+        avg7d: metric.avg7d,
+        avg30d: metric.avg30d,
         severity: isCritical ? 'critical' : 'warning',
         impactMessage: IMPACT_MESSAGES[metric.key] ?? '',
         areaLabel: area.label,

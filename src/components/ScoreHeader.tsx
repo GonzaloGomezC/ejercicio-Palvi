@@ -5,6 +5,7 @@ import { statusForScore } from '../lib/scoring'
 type Props = {
   generalScore: number
   areaScores: AreaScore[]
+  onAreaClick?: (area: AreaScore) => void
 }
 
 const TONE_TEXT = {
@@ -13,7 +14,7 @@ const TONE_TEXT = {
   red: 'text-status-red',
 } as const
 
-export function ScoreHeader({ generalScore, areaScores }: Props) {
+export function ScoreHeader({ generalScore, areaScores, onAreaClick }: Props) {
   const status = statusForScore(generalScore)
   const lowestScore = Math.min(...areaScores.map((a) => a.score))
 
@@ -39,16 +40,15 @@ export function ScoreHeader({ generalScore, areaScores }: Props) {
         {areaScores.map((area) => {
           const isLowest = area.score === lowestScore
           const tone = statusForScore(area.score).tone
-          return (
-            <div
-              key={area.area}
-              className={clsx(
-                'rounded-md border p-2.5',
-                isLowest
-                  ? 'border-orange-500 bg-orange-500/10'
-                  : 'border-transparent bg-navy-900/5',
-              )}
-            >
+          const baseClasses = clsx(
+            'text-left rounded-md border p-2.5 w-full',
+            isLowest
+              ? 'border-orange-500 bg-orange-500/10'
+              : 'border-transparent bg-navy-900/5',
+            onAreaClick && 'hover:bg-navy-900/10 cursor-pointer',
+          )
+          const inner = (
+            <>
               <p className="text-xs font-medium text-navy-700/70">
                 {area.icon} {area.label}
               </p>
@@ -60,6 +60,24 @@ export function ScoreHeader({ generalScore, areaScores }: Props) {
               >
                 {Math.round(area.score)}
               </p>
+            </>
+          )
+
+          if (onAreaClick) {
+            return (
+              <button
+                key={area.area}
+                type="button"
+                onClick={() => onAreaClick(area)}
+                className={baseClasses}
+              >
+                {inner}
+              </button>
+            )
+          }
+          return (
+            <div key={area.area} className={baseClasses}>
+              {inner}
             </div>
           )
         })}
