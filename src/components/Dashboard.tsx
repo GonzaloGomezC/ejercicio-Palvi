@@ -9,6 +9,7 @@ import { DatasetTabs } from './DatasetTabs'
 import { ScoreHeader } from './ScoreHeader'
 import { AlertPanel } from './AlertPanel'
 import { KpiStrip } from './KpiStrip'
+import { SparklineGrid } from './SparklineGrid'
 
 type Props = {
   dataset: Dataset
@@ -47,6 +48,13 @@ export function Dashboard({ dataset, active, onChange }: Props) {
             Resumen de ayer
           </h2>
           <KpiStrip dataset={dataset} />
+        </div>
+
+        <div>
+          <h2 className="text-sm font-semibold text-navy-700/80 mb-3">
+            Tendencias últimas 4 semanas
+          </h2>
+          <SparklineGrid dataset={dataset} />
         </div>
       </main>
     </div>
