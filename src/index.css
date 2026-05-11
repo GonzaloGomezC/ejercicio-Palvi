@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-900: #1a2332;
+  --color-navy-800: #2a3441;
+  --color-navy-700: #3a4451;
+  --color-orange-500: #ff6b35;
+  --color-surface: #f5f7fa;
+
+  --color-status-green: #22c55e;
+  --color-status-yellow: #eab308;
+  --color-status-red: #ef4444;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-surface);
+  color: var(--color-navy-900);
+  font-family: var(--font-sans);
+}
