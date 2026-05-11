@@ -53,7 +53,7 @@ export function KpiCard({
       <button
         type="button"
         onClick={onClick}
-        className="text-left rounded-lg bg-white p-4 shadow-sm hover:shadow-md hover:bg-navy-900/[0.02] cursor-pointer"
+        className="text-left rounded-lg bg-white p-4 shadow-sm hover:shadow-lg hover:bg-orange-500/[0.03] cursor-pointer ring-1 ring-transparent hover:ring-orange-500/20"
       >
         {inner}
       </button>

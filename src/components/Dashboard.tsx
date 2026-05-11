@@ -71,8 +71,9 @@ export function Dashboard({ dataset, active, onChange }: Props) {
       <header className="bg-navy-900 text-white">
         <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-lg font-bold">Palvi · Dashboard Ejecutivo</h1>
-            <p className="text-xs text-white/60">
+            <h1 className="text-lg font-bold tracking-tight">Palvi · Dashboard Ejecutivo</h1>
+            <p className="text-xs text-white/60 flex items-center gap-1.5 mt-0.5">
+              <span className="pulse-dot inline-block w-1.5 h-1.5 rounded-full bg-status-green" />
               Dataset {active} · {dataset.days.length} días
             </p>
           </div>

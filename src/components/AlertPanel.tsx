@@ -6,9 +6,9 @@ type Props = {
   onAlertClick?: (alert: Alert) => void
 }
 
-const SEVERITY_ICON = {
-  critical: '🔴',
-  warning: '🟡',
+const SEVERITY_DOT = {
+  critical: 'bg-status-red',
+  warning: 'bg-status-yellow',
 } as const
 
 function formatDelta(rawDelta: number | null): string {
@@ -48,9 +48,10 @@ export function AlertPanel({ alerts, onAlertClick }: Props) {
               : 'var(--color-status-yellow)'
           const inner = (
             <>
-              <span aria-hidden className="text-lg leading-tight">
-                {SEVERITY_ICON[alert.severity]}
-              </span>
+              <span
+                aria-hidden
+                className={clsx('mt-0.5 inline-block w-2.5 h-2.5 rounded-full shrink-0', SEVERITY_DOT[alert.severity])}
+              />
               <div className="flex-1 min-w-0">
                 <div className="flex items-baseline justify-between gap-2">
                   <p className="font-semibold text-navy-900 truncate">

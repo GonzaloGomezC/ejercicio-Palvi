@@ -26,8 +26,8 @@ export function DatasetTabs({ active, onChange }: Props) {
             className={clsx(
               'min-w-10 px-4 py-1.5 text-sm font-semibold rounded',
               isActive
-                ? 'bg-orange-500 text-white'
-                : 'text-white/70 hover:text-white',
+                ? 'bg-orange-500 text-white shadow-md shadow-orange-500/30'
+                : 'text-white/70 hover:text-white hover:bg-white/10',
             )}
           >
             {key}

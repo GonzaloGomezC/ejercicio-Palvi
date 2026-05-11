@@ -13,6 +13,12 @@ const TONE_TEXT = {
   red: 'text-status-red',
 } as const
 
+const TONE_DOT = {
+  green: 'bg-status-green',
+  yellow: 'bg-status-yellow',
+  red: 'bg-status-red',
+} as const
+
 const fmt = (v: number | null) =>
   v === null ? '—' : Number.isInteger(v) ? v.toLocaleString('es-CL') : v.toFixed(2)
 
@@ -39,8 +45,9 @@ export function AreaDetail({ area }: Props) {
           {Math.round(area.score)}
           <span className="text-base font-medium text-navy-700/60">/100</span>
         </p>
-        <p className={clsx('text-sm font-semibold', TONE_TEXT[status.tone])}>
-          {status.emoji} {status.label}
+        <p className={clsx('text-sm font-semibold flex items-center gap-1.5', TONE_TEXT[status.tone])}>
+          <span className={clsx('inline-block w-2 h-2 rounded-full', TONE_DOT[status.tone])} aria-hidden />
+          {status.label}
         </p>
       </div>
 

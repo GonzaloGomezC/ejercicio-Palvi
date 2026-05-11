@@ -14,6 +14,12 @@ const TONE_TEXT = {
   red: 'text-status-red',
 } as const
 
+const TONE_DOT = {
+  green: 'bg-status-green',
+  yellow: 'bg-status-yellow',
+  red: 'bg-status-red',
+} as const
+
 export function ScoreHeader({ generalScore, areaScores, onAreaClick }: Props) {
   const status = statusForScore(generalScore)
   const lowestScore = Math.min(...areaScores.map((a) => a.score))
@@ -31,8 +37,9 @@ export function ScoreHeader({ generalScore, areaScores, onAreaClick }: Props) {
         <p className={clsx('text-5xl font-bold', TONE_TEXT[status.tone])}>
           {Math.round(generalScore)}
         </p>
-        <p className={clsx('text-base font-semibold', TONE_TEXT[status.tone])}>
-          {status.emoji} {status.label}
+        <p className={clsx('text-base font-semibold flex items-center gap-2', TONE_TEXT[status.tone])}>
+          <span className={clsx('inline-block w-2.5 h-2.5 rounded-full', TONE_DOT[status.tone])} aria-hidden />
+          {status.label}
         </p>
       </div>
 
@@ -45,7 +52,7 @@ export function ScoreHeader({ generalScore, areaScores, onAreaClick }: Props) {
             isLowest
               ? 'border-orange-500 bg-orange-500/10'
               : 'border-transparent bg-navy-900/5',
-            onAreaClick && 'hover:bg-navy-900/10 cursor-pointer',
+            onAreaClick && 'hover:bg-orange-500/[0.06] hover:border-orange-500/40 hover:shadow-sm cursor-pointer',
           )
           const inner = (
             <>

@@ -142,12 +142,9 @@ export function computeAlerts(areaScores: AreaScore[]): Alert[] {
 
 export function statusForScore(score: number): {
   tone: StatusTone
-  emoji: string
   label: string
 } {
-  if (score >= 75)
-    return { tone: 'green', emoji: '🟢', label: 'Operación saludable' }
-  if (score >= 50)
-    return { tone: 'yellow', emoji: '🟡', label: 'Atención requerida' }
-  return { tone: 'red', emoji: '🔴', label: 'Acción urgente' }
+  if (score >= 75) return { tone: 'green', label: 'Operación saludable' }
+  if (score >= 50) return { tone: 'yellow', label: 'Atención requerida' }
+  return { tone: 'red', label: 'Acción urgente' }
 }

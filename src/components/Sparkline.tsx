@@ -50,7 +50,7 @@ export function Sparkline({
         type: 'button' as const,
         onClick,
         className:
-          'text-left rounded-lg bg-white p-3 shadow-sm hover:shadow-md hover:bg-navy-900/[0.02] cursor-pointer w-full',
+          'text-left rounded-lg bg-white p-3 shadow-sm hover:shadow-lg hover:bg-orange-500/[0.03] cursor-pointer w-full ring-1 ring-transparent hover:ring-orange-500/20',
       }
     : { className: 'rounded-lg bg-white p-3 shadow-sm' }
 

@@ -7,11 +7,11 @@
   --color-orange-500: #ff6b35;
   --color-surface: #f5f7fa;
 
-  --color-status-green: #22c55e;
-  --color-status-yellow: #eab308;
-  --color-status-red: #ef4444;
+  --color-status-green: #10b981;
+  --color-status-yellow: #f59e0b;
+  --color-status-red: #f43f5e;
 
-  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 html, body, #root {
@@ -23,4 +23,38 @@ body {
   background-color: var(--color-surface);
   color: var(--color-navy-900);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button, a {
+  transition: background-color 150ms ease, box-shadow 150ms ease, color 150ms ease, opacity 150ms ease;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-700);
+  border-radius: 3px;
+  opacity: 0.4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-navy-800);
 }

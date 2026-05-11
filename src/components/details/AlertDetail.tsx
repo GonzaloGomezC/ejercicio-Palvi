@@ -6,8 +6,8 @@ type Props = {
 }
 
 const SEVERITY = {
-  critical: { icon: '🔴', label: 'Crítica', color: 'text-status-red' },
-  warning: { icon: '🟡', label: 'Advertencia', color: 'text-status-yellow' },
+  critical: { dot: 'bg-status-red', label: 'Crítica', color: 'text-status-red' },
+  warning: { dot: 'bg-status-yellow', label: 'Advertencia', color: 'text-status-yellow' },
 } as const
 
 const fmt = (v: number | null) =>
@@ -25,8 +25,9 @@ export function AlertDetail({ alert }: Props) {
   return (
     <div className="space-y-4">
       <div>
-        <p className={clsx('text-sm font-semibold', sev.color)}>
-          {sev.icon} Alerta {sev.label.toLowerCase()}
+        <p className={clsx('text-sm font-semibold flex items-center gap-1.5', sev.color)}>
+          <span className={clsx('inline-block w-2 h-2 rounded-full', sev.dot)} aria-hidden />
+          Alerta {sev.label.toLowerCase()}
         </p>
         <p className="text-2xl font-bold text-navy-900 mt-1">
           {alert.metricLabel}
